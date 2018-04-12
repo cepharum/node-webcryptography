@@ -1,6 +1,6 @@
-let getRandomValues = require( "../lib/getRandomValues" );
-let { TypeMismatchError, QuotaExceededError } = require( "../lib/errors" );
-let should = require( "should" );
+const getRandomValues = require( "../lib/getRandomValues" );
+const { TypeMismatchError, QuotaExceededError } = require( "../lib/errors" );
+const should = require( "should" );
 
 describe( "getRandomValues", function() {
 	it( "accepts and returns Int8Array", () => {

@@ -1,5 +1,5 @@
 {
-  "name": "webcryptography",
+  "name": "node-webcryptography",
   "version": "1.0.0",
   "description": "Web Cryptogrophy Api for Node Js",
   "main": "index.js",
