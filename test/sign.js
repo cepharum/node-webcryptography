@@ -1,30 +1,29 @@
-const encrypt = require( "../lib/encrypt" );
-const decrpyt = require( "../lib/decrypt" );
+const sign = require( "../lib/sign" );
 const { TypeMismatchError, QuotaExceededError } = require( "../lib/errors" );
 const should = require( "should" );
 
 
-describe( "encrypt", () => {
+describe( "sign", () => {
 	it( "accept string as alg", () => {
 		const cryptoKey = {
 			algorithm: {
-				name: "aes192"
+				name: "SHA256"
 			},
 			extractable: false,
 			type: "string",
-			usages: [ "encrypt" ],
+			usages: [ "sign" ],
 		};
 		let data = new ArrayBuffer( 10 );
-		return encrypt( "aes192", cryptoKey, data )
+		return sign( "SHA256", cryptoKey, data )
 	} );
 	it( "accept Object as alg", () => {
 		const cryptoKey = {
 			algorithm: {
-				name: "aes192"
+				name: "SHA256"
 			},
 			extractable: false,
 			type: "string",
-			usages: [ "encrypt" ],
+			usages: [ "sign" ],
 		};
 
 		let str = "encrypt me please!";
@@ -33,10 +32,10 @@ describe( "encrypt", () => {
 		for ( let i = 0, strLen = str.length; i < strLen; i++ ) {
 			bufView[ i ] = str.charCodeAt( i );
 		}
-		console.log( data );
-		return encrypt( { name: "aes192" }, cryptoKey, data ).then( buf => {
-			decrpyt( { name: "aes192" }, cryptoKey, buf )
-				.then( res => console.log( String.fromCharCode.apply(null, new Uint16Array(data)) ) )
-		} )
-	} );
+		return sign( { name: "SHA256" }, cryptoKey, data )
+			.then( res => {
+				console.log( String.fromCharCode.apply( null, new Uint16Array( data ) ) )
+				done();
+			} )
+	} )
 } );
